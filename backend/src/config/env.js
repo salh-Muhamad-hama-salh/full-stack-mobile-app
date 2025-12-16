@@ -66,6 +66,6 @@ validateRequired("DB_URL", DB_URL);
 // Export validated configuration
 export const ENV = {
   NODE_ENV: validateNodeEnv(NODE_ENV),
-  PORT: validatePort(PORT), // validatePort handles both missing and invalid PORT
+  PORT: validatePort(PORT),
   DB_URL: DB_URL,
 };
