@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "e-commerce-mobile-app": "file:..",
     "express": "^5.2.1",
     "nodemon": "^3.1.11"
   }
