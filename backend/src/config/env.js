@@ -9,7 +9,7 @@ dotenv.config();
  * @throws {Error} If the variable is not set
  */
 function validateRequired(key, value) {
-  if (!value) {
+  if (value === undefined || value === null || value === "") {
     throw new Error(
       `Missing required environment variable: ${key}\n` +
       `Please set ${key} in your .env file or environment.`
@@ -21,9 +21,15 @@ function validateRequired(key, value) {
  * Validates that a port number is valid
  * @param {string} port - The port value
  * @returns {number} The validated port number
- * @throws {Error} If the port is invalid
+ * @throws {Error} If the port is missing or invalid
  */
 function validatePort(port) {
+  if (port === undefined || port === null || port === "") {
+    throw new Error(
+      `Missing required environment variable: PORT\n` +
+      `Please set PORT in your .env file or environment.`
+    );
+  }
   const portNum = parseInt(port, 10);
   if (isNaN(portNum) || portNum < 1 || portNum > 65535) {
     throw new Error(
@@ -55,12 +61,11 @@ const PORT = process.env.PORT;
 const DB_URL = process.env.DB_URL;
 
 // Validate required variables
-validateRequired("PORT", PORT);
 validateRequired("DB_URL", DB_URL);
 
 // Export validated configuration
 export const ENV = {
   NODE_ENV: validateNodeEnv(NODE_ENV),
-  PORT: validatePort(PORT),
+  PORT: validatePort(PORT), // validatePort handles both missing and invalid PORT
   DB_URL: DB_URL,
 };
