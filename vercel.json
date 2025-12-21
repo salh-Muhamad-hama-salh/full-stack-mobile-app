@@ -2,25 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "admin/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    },
-    {
       "src": "backend/src/server.js",
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/src/server.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/admin/dist/$1"
+      "src": "/api/(.*)",
+      "dest": "/backend/src/server.js"
     }
-  ]
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "admin/dist",
+  "installCommand": "npm install"
 }
