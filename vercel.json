@@ -2,6 +2,13 @@
   "version": 2,
   "builds": [
     {
+      "src": "admin/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
       "src": "backend/src/server.js",
       "use": "@vercel/node"
     }
@@ -13,10 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "admin/dist/$1"
+      "dest": "admin/$1"
     }
-  ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "admin/dist",
-  "installCommand": "npm install"
+  ]
 }
