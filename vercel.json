@@ -1,18 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "admin/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "admin/dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "buildCommand": "cd admin && npm run build",
+  "outputDirectory": "admin/dist",
+  "installCommand": "npm install --prefix admin"
 }
