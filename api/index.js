@@ -1,5 +1,6 @@
 export default function handler(req, res) {
-  const path = req.url || "/";
+  // Parse the URL to remove query parameters
+  const path = (req.url || "/").split("?")[0];
 
   if (
     (path === "/health" || path === "/api/health" || path === "/") &&
