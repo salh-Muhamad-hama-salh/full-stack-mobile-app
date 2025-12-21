@@ -1,16 +1,11 @@
-import express from "express";
+export default function handler(req, res) {
+  if (req.url === "/api/health" && req.method === "GET") {
+    return res.status(200).json({
+      status: "SUCCESS",
+      message: "API is healthy",
+    });
+  }
 
-const app = express();
-
-app.use(express.json());
-
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    status: "SUCCESS",
-    message: "API is healthy",
-  });
-});
-
-// Add your other API routes here
-
-export default app;
+  // Default response
+  res.status(404).json({ error: "Not found" });
+}
