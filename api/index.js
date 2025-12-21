@@ -1,5 +1,10 @@
 export default function handler(req, res) {
-  if (req.url === "/api/health" && req.method === "GET") {
+  const path = req.url || "/";
+
+  if (
+    (path === "/health" || path === "/api/health" || path === "/") &&
+    req.method === "GET"
+  ) {
     return res.status(200).json({
       status: "SUCCESS",
       message: "API is healthy",
@@ -7,5 +12,5 @@ export default function handler(req, res) {
   }
 
   // Default response
-  res.status(404).json({ error: "Not found" });
+  res.status(404).json({ error: "Not found", path: path });
 }
