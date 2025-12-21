@@ -5,9 +5,18 @@ import { connectDB } from "./config/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./config/inngest.js";
+import webhookRoutes from "./routes/webhook.routes.js";
 
 const app = express();
 const __dirname = path.resolve();
+
+// Clerk webhook route (MUST be before express.json())
+app.use(
+  "/api/webhooks",
+  express.raw({ type: "application/json" }),
+  webhookRoutes
+);
+
 app.use(express.json());
 
 app.use(clerkMiddleware());
