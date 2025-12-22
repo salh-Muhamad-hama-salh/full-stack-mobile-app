@@ -5,6 +5,7 @@ import { connectDB } from "./config/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./config/inngest.js";
+import adminRoutes from "./routes/admin.route.js";
 
 const app = express();
 const __dirname = path.resolve();
@@ -21,6 +22,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/inngest", serve({ client: inngest, functions: functions }));
+app.use("/api/admin", adminRoutes);
 
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../admin/dist")));
